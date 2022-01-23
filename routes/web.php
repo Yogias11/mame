@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\admin\ProdukController;
+use App\Http\Controllers\admin\SettingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +17,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('test');
+});
+
+Route::prefix('master')->group(function() {
+    // produk
+    Route::get('produk', [ProdukController::class, 'index_produk'])->name('produk.index');
+});
+
+Route::prefix('setting')->group(function() {
+    Route::get('menu', [SettingController::class, 'index_menu'])->name('menu.index');
+    Route::post('menu-store', [SettingController::class, 'store_menu'])->name('menu.store');
+    Route::post('menu-get', [SettingController::class, 'get_menu'])->name('menu.get');
+
+    Route::get('submenu/{id}', [SettingController::class, 'index_submenu'])->name('submenu.index');
 });
