@@ -50,7 +50,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Daftar SubMenu</h3>
+                <h3 class="card-title">Daftar Role</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -59,7 +59,6 @@
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
-                            <th>Url</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -94,9 +93,6 @@
 <script src="{{ asset('assets') }}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="{{ asset('assets') }}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script>
-    let menuid = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
-    let menuval = $('#menu_id').val(menuid);
-    console.log(menuval);
     $(function () {
         $("#example1").DataTable({
             "responsive": true,

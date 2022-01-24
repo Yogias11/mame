@@ -23,7 +23,8 @@ class SettingController extends Controller
         $menu->ordering = $request->ordering;
         $menu->save();
 
-        return redirect()->route('menu.index')->with(['msg' => 'Data Berhasil Disimpan']);
+        // return redirect()->route('menu.index')->with(['msg' => 'Data Berhasil Disimpan']);
+        return response()->json(['msg' => 'Data Berhasil Disimpan']);
     }
 
     function update_menu(Request $request)
@@ -33,12 +34,18 @@ class SettingController extends Controller
 
     function delete_menu(Request $request)
     {
-
+        Menu::find($request->id)->delete();
     }
 
     // submenu
     function index_submenu()
     {
         return view('admin.setting.submenu');
+    }
+
+    // roles
+    function index_role()
+    {
+        return view('admin.setting.role');
     }
 }

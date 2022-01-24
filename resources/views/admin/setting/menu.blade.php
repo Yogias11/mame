@@ -4,6 +4,8 @@
 <!-- DataTables -->
 <link rel="stylesheet" href="{{ asset('assets') }}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="{{ asset('assets') }}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+<!-- Toastr -->
+<link rel="stylesheet" href="{{ asset('assets') }}/plugins/toastr/toastr.min.css">
 @endpush
 
 @section('content')
@@ -15,7 +17,7 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form role="form" action="{{ route('menu.store') }}" method="POST">
+            <form role="form" id="formMenu">
                 @csrf
                 <div class="card-body">
                     <div class="form-group">
@@ -38,7 +40,7 @@
                 <!-- /.card-body -->
         
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary" id="btnSubmit">Save</button>
                 </div>
             </form>
         </div>
@@ -73,8 +75,8 @@
                                <td>{{ $i->url }}</td>
                                <td>
                                    <a href="{{ url('setting/submenu/'. $i->id) }}" class="btn btn-outline-info btn-sm"><i class="fas fa-eye"> Submenu</i></a>
-                                   <a href="{{ url('setting/submenu/'. $i->id) }}" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#modal-default"><i class="fas fa-edit"> Edit</i></a>
-                                   <a href="" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"> Delete</i></a>
+                                   <button class="btn btn-outline-success btn-sm" data-id={{ $i->id }} id="btnEdit"><i class="fas fa-edit"> Edit</i></button>
+                                   <button class="btn btn-outline-danger btn-sm" id="btnDelete" data-id="{{ $i->id }}"><i class="fas fa-trash"> Delete</i></button>
                                </td>
                            </tr>
                        @endforeach
@@ -87,7 +89,7 @@
 </div>
 
 {{-- modal --}}
-<div class="modal fade" id="modal-default">
+<div class="modal fade" id="modal-edit">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -101,7 +103,7 @@
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary" id="btnSave">Save changes</button>
         </div>
       </div>
       <!-- /.modal-content -->
@@ -116,6 +118,8 @@
 <script src="{{ asset('assets') }}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="{{ asset('assets') }}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="{{ asset('assets') }}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<!-- Toastr -->
+<script src="{{ asset('assets') }}/plugins/toastr/toastr.min.js"></script>
 <script>
     $(function () {
         $("#example1").DataTable({
@@ -131,7 +135,87 @@
             "autoWidth": false,
             "responsive": true,
         });
+
+        $('body').on('submit', '#formMenu', function(e) {
+            e.preventDefault();
+            $('#btnSubmit').html('Sending..');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                    var formData = new FormData(this);
+                    $.ajax({
+                        type: "post",
+                        url: "{{ route('menu.store') }}",
+                        data: formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: (data) => {
+                            location.reload();
+                            // console.log(data);
+                        }
+                        // $("#example1").DataTable().ajax.reload();
+                    })
+                }
+            })
+        })
     });
 
+    $(document).on('click', '#btnDelete', function() {
+        console.log($(this).data('id'));
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+                )
+            }
+        })
+    })
+
+    $(document).on('click', '#btnEdit', function() {
+        $('#modal-edit').modal('show');
+    })
+
+    $(document).on('click', '#btnSave', function() {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+                )
+            }
+        })
+    })
 </script>
 @endpush

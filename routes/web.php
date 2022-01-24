@@ -30,4 +30,6 @@ Route::prefix('setting')->group(function() {
     Route::post('menu-get', [SettingController::class, 'get_menu'])->name('menu.get');
 
     Route::get('submenu/{id}', [SettingController::class, 'index_submenu'])->name('submenu.index');
+
+    Route::get('roles/', [SettingController::class, 'index_role'])->name('role.index');
 });

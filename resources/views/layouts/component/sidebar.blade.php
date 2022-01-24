@@ -72,7 +72,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ asset('') }}assets/index2.html" class="nav-link">
+                <a href="{{ url('setting/roles') }}" class="nav-link">
                   <i class="far fa-user nav-icon"></i>
                   <p>Roles</p>
                 </a>
