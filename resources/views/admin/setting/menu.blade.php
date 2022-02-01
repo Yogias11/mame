@@ -93,18 +93,36 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Default Modal</h4>
+          <h4 class="modal-title" id="titleForm">Edit Data</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        <form role="form" id="formEdit">
+            @csrf
         <div class="modal-body">
-          <p>One fine body&hellip;</p>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Nama</label>
+                <input type="text" class="form-control" name="nama" id="exampleInputEmail1" placeholder="Nama">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Icon</label>
+                <input type="text" class="form-control" name="icons" id="exampleInputPassword1" placeholder="Icon">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Url</label>
+                <input type="text" class="form-control" name="url" id="exampleInputPassword1" placeholder="URL">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Ordering</label>
+                <input type="text" class="form-control" name="ordering" id="exampleInputPassword1" placeholder="Ordering">
+            </div>
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary" id="btnSave">Save changes</button>
         </div>
+        </form>
       </div>
       <!-- /.modal-content -->
     </div>
@@ -164,7 +182,6 @@
                         processData: false,
                         success: (data) => {
                             location.reload();
-                            // console.log(data);
                         }
                         // $("#example1").DataTable().ajax.reload();
                     })
@@ -172,9 +189,9 @@
             })
         })
     });
-
-    $(document).on('click', '#btnDelete', function() {
-        console.log($(this).data('id'));
+    var menuid = $(this).data('id');
+    $(document).on('click', '#btnDelete', function(e) {
+        e.preventDefault();
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -185,11 +202,25 @@
             confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-                )
+                $.ajax({
+                    url: "{{ url('setting/menu-delete/') }}" + menuid,
+                    type: "post",
+                    data: {
+                        id: menuid,
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function(res) {
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        ).then(function () {
+                            location.reload();
+                        }) 
+                    }
+                })
+                
+
             }
         })
     })

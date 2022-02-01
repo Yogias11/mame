@@ -58,6 +58,36 @@
 
           <li class="nav-item">
             <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Master
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ asset('') }}assets/index2.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Kelompok Produk</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('produk.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Produk</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ asset('') }}assets/index3.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Dashboard v3</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tools"></i>
               <p>
                 Setting

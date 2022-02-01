@@ -32,9 +32,9 @@ class SettingController extends Controller
 
     }
 
-    function delete_menu(Request $request)
+    function delete_menu($id)
     {
-        Menu::find($request->id)->delete();
+        return Menu::find($id)->delete($id);
     }
 
     // submenu

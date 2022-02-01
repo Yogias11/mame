@@ -7,443 +7,92 @@
 @endpush
 
 @section('content')
-<div class="card">
-  <div class="card-header">
-    <h3 class="card-title">DataTable with default features</h3>
+<div class="row">
+    <div class="col-6">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Tambah Produk</h3>
+            </div>
+            <form role="form" action="" id="formProduk" name="formProduk">
+                @csrf
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Kode</label>
+                        <input type="text" class="form-control" name="kode" id="exampleInputEmail1" placeholder="Kode">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Nama</label>
+                        <input type="text" class="form-control" name="nama" id="exampleInputEmail1" placeholder="Nama">
+                    </div>
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary" id="btnSubmit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">DataTable with default features</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="table-produk" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Kode</th>
+                            <th>Nama</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</div>
+
+{{-- modal --}}
+<div class="modal fade" id="modal-info">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="title">Default Modal</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form role="form" action="" id="formProdukEdit" name="formProdukEdit">
+        @csrf
+      <div class="modal-body">
+        <input type="hidden" name="id" id="id">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Kode</label>
+          <input type="text" class="form-control" name="kode" id="kode" placeholder="Kode">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Nama</label>
+            <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama">
+        </div>
+          <!-- /.card-body -->
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" id="btnSave">Save changes</button>
+      </div>
+    </form>
+    </div>
+    <!-- /.modal-content -->
   </div>
-  <!-- /.card-header -->
-  <div class="card-body">
-    <table id="example1" class="table table-bordered table-striped">
-      <thead>
-      <tr>
-        <th>Rendering engine</th>
-        <th>Browser</th>
-        <th>Platform(s)</th>
-        <th>Engine version</th>
-        <th>CSS grade</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td>Trident</td>
-        <td>Internet
-          Explorer 4.0
-        </td>
-        <td>Win 95+</td>
-        <td> 4</td>
-        <td>X</td>
-      </tr>
-      <tr>
-        <td>Trident</td>
-        <td>Internet
-          Explorer 5.0
-        </td>
-        <td>Win 95+</td>
-        <td>5</td>
-        <td>C</td>
-      </tr>
-      <tr>
-        <td>Trident</td>
-        <td>Internet
-          Explorer 5.5
-        </td>
-        <td>Win 95+</td>
-        <td>5.5</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Trident</td>
-        <td>Internet
-          Explorer 6
-        </td>
-        <td>Win 98+</td>
-        <td>6</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Trident</td>
-        <td>Internet Explorer 7</td>
-        <td>Win XP SP2+</td>
-        <td>7</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Trident</td>
-        <td>AOL browser (AOL desktop)</td>
-        <td>Win XP</td>
-        <td>6</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Gecko</td>
-        <td>Firefox 1.0</td>
-        <td>Win 98+ / OSX.2+</td>
-        <td>1.7</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Gecko</td>
-        <td>Firefox 1.5</td>
-        <td>Win 98+ / OSX.2+</td>
-        <td>1.8</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Gecko</td>
-        <td>Firefox 2.0</td>
-        <td>Win 98+ / OSX.2+</td>
-        <td>1.8</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Gecko</td>
-        <td>Firefox 3.0</td>
-        <td>Win 2k+ / OSX.3+</td>
-        <td>1.9</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Gecko</td>
-        <td>Camino 1.0</td>
-        <td>OSX.2+</td>
-        <td>1.8</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Gecko</td>
-        <td>Camino 1.5</td>
-        <td>OSX.3+</td>
-        <td>1.8</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Gecko</td>
-        <td>Netscape 7.2</td>
-        <td>Win 95+ / Mac OS 8.6-9.2</td>
-        <td>1.7</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Gecko</td>
-        <td>Netscape Browser 8</td>
-        <td>Win 98SE+</td>
-        <td>1.7</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Gecko</td>
-        <td>Netscape Navigator 9</td>
-        <td>Win 98+ / OSX.2+</td>
-        <td>1.8</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Gecko</td>
-        <td>Mozilla 1.0</td>
-        <td>Win 95+ / OSX.1+</td>
-        <td>1</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Gecko</td>
-        <td>Mozilla 1.1</td>
-        <td>Win 95+ / OSX.1+</td>
-        <td>1.1</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Gecko</td>
-        <td>Mozilla 1.2</td>
-        <td>Win 95+ / OSX.1+</td>
-        <td>1.2</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Gecko</td>
-        <td>Mozilla 1.3</td>
-        <td>Win 95+ / OSX.1+</td>
-        <td>1.3</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Gecko</td>
-        <td>Mozilla 1.4</td>
-        <td>Win 95+ / OSX.1+</td>
-        <td>1.4</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Gecko</td>
-        <td>Mozilla 1.5</td>
-        <td>Win 95+ / OSX.1+</td>
-        <td>1.5</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Gecko</td>
-        <td>Mozilla 1.6</td>
-        <td>Win 95+ / OSX.1+</td>
-        <td>1.6</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Gecko</td>
-        <td>Mozilla 1.7</td>
-        <td>Win 98+ / OSX.1+</td>
-        <td>1.7</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Gecko</td>
-        <td>Mozilla 1.8</td>
-        <td>Win 98+ / OSX.1+</td>
-        <td>1.8</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Gecko</td>
-        <td>Seamonkey 1.1</td>
-        <td>Win 98+ / OSX.2+</td>
-        <td>1.8</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Gecko</td>
-        <td>Epiphany 2.20</td>
-        <td>Gnome</td>
-        <td>1.8</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Webkit</td>
-        <td>Safari 1.2</td>
-        <td>OSX.3</td>
-        <td>125.5</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Webkit</td>
-        <td>Safari 1.3</td>
-        <td>OSX.3</td>
-        <td>312.8</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Webkit</td>
-        <td>Safari 2.0</td>
-        <td>OSX.4+</td>
-        <td>419.3</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Webkit</td>
-        <td>Safari 3.0</td>
-        <td>OSX.4+</td>
-        <td>522.1</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Webkit</td>
-        <td>OmniWeb 5.5</td>
-        <td>OSX.4+</td>
-        <td>420</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Webkit</td>
-        <td>iPod Touch / iPhone</td>
-        <td>iPod</td>
-        <td>420.1</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Webkit</td>
-        <td>S60</td>
-        <td>S60</td>
-        <td>413</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Presto</td>
-        <td>Opera 7.0</td>
-        <td>Win 95+ / OSX.1+</td>
-        <td>-</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Presto</td>
-        <td>Opera 7.5</td>
-        <td>Win 95+ / OSX.2+</td>
-        <td>-</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Presto</td>
-        <td>Opera 8.0</td>
-        <td>Win 95+ / OSX.2+</td>
-        <td>-</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Presto</td>
-        <td>Opera 8.5</td>
-        <td>Win 95+ / OSX.2+</td>
-        <td>-</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Presto</td>
-        <td>Opera 9.0</td>
-        <td>Win 95+ / OSX.3+</td>
-        <td>-</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Presto</td>
-        <td>Opera 9.2</td>
-        <td>Win 88+ / OSX.3+</td>
-        <td>-</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Presto</td>
-        <td>Opera 9.5</td>
-        <td>Win 88+ / OSX.3+</td>
-        <td>-</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Presto</td>
-        <td>Opera for Wii</td>
-        <td>Wii</td>
-        <td>-</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Presto</td>
-        <td>Nokia N800</td>
-        <td>N800</td>
-        <td>-</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Presto</td>
-        <td>Nintendo DS browser</td>
-        <td>Nintendo DS</td>
-        <td>8.5</td>
-        <td>C/A<sup>1</sup></td>
-      </tr>
-      <tr>
-        <td>KHTML</td>
-        <td>Konqureror 3.1</td>
-        <td>KDE 3.1</td>
-        <td>3.1</td>
-        <td>C</td>
-      </tr>
-      <tr>
-        <td>KHTML</td>
-        <td>Konqureror 3.3</td>
-        <td>KDE 3.3</td>
-        <td>3.3</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>KHTML</td>
-        <td>Konqureror 3.5</td>
-        <td>KDE 3.5</td>
-        <td>3.5</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Tasman</td>
-        <td>Internet Explorer 4.5</td>
-        <td>Mac OS 8-9</td>
-        <td>-</td>
-        <td>X</td>
-      </tr>
-      <tr>
-        <td>Tasman</td>
-        <td>Internet Explorer 5.1</td>
-        <td>Mac OS 7.6-9</td>
-        <td>1</td>
-        <td>C</td>
-      </tr>
-      <tr>
-        <td>Tasman</td>
-        <td>Internet Explorer 5.2</td>
-        <td>Mac OS 8-X</td>
-        <td>1</td>
-        <td>C</td>
-      </tr>
-      <tr>
-        <td>Misc</td>
-        <td>NetFront 3.1</td>
-        <td>Embedded devices</td>
-        <td>-</td>
-        <td>C</td>
-      </tr>
-      <tr>
-        <td>Misc</td>
-        <td>NetFront 3.4</td>
-        <td>Embedded devices</td>
-        <td>-</td>
-        <td>A</td>
-      </tr>
-      <tr>
-        <td>Misc</td>
-        <td>Dillo 0.8</td>
-        <td>Embedded devices</td>
-        <td>-</td>
-        <td>X</td>
-      </tr>
-      <tr>
-        <td>Misc</td>
-        <td>Links</td>
-        <td>Text only</td>
-        <td>-</td>
-        <td>X</td>
-      </tr>
-      <tr>
-        <td>Misc</td>
-        <td>Lynx</td>
-        <td>Text only</td>
-        <td>-</td>
-        <td>X</td>
-      </tr>
-      <tr>
-        <td>Misc</td>
-        <td>IE Mobile</td>
-        <td>Windows Mobile 6</td>
-        <td>-</td>
-        <td>C</td>
-      </tr>
-      <tr>
-        <td>Misc</td>
-        <td>PSP browser</td>
-        <td>PSP</td>
-        <td>-</td>
-        <td>C</td>
-      </tr>
-      <tr>
-        <td>Other browsers</td>
-        <td>All others</td>
-        <td>-</td>
-        <td>-</td>
-        <td>U</td>
-      </tr>
-      </tbody>
-      <tfoot>
-      <tr>
-        <th>Rendering engine</th>
-        <th>Browser</th>
-        <th>Platform(s)</th>
-        <th>Engine version</th>
-        <th>CSS grade</th>
-      </tr>
-      </tfoot>
-    </table>
-  </div>
-  <!-- /.card-body -->
+  <!-- /.modal-dialog -->
 </div>
 @endsection
 
@@ -454,20 +103,178 @@
 <script src="{{ asset('assets') }}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="{{ asset('assets') }}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true,
-      "autoWidth": false,
+    $(function () {
+        // general
+        var id = null;
+        function modalshow() {
+          $('#modal-info').modal('show');
+        }
+        // data produk
+        $("#table-produk").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+            ajax: {
+                url: "/api/v1/produk",
+                type: "post",
+            },
+            columns: [{
+                    data: 'DT_RowIndex'
+                },
+                {
+                    data: 'kode'
+                },
+                {
+                    data: 'nama'
+                },
+                {
+                    data: 'aksi'
+                }
+            ]
+        });
+        // submit new produk
+        $('body').on('submit', '#formProduk', function (e) {
+            e.preventDefault();
+            $('#btnSubmit').html('Sending..');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, save it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var formData = new FormData(this);
+                    $.ajax({
+                        type: "post",
+                        url: "{{ url('/api/v1/create-produk') }}",
+                        data: formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: (data) => {
+                            Swal.fire(
+                                'Success!',
+                                data.msg,
+                                'success'
+                            )
+                            location.reload();
+                        }
+                        // $("#example1").DataTable().ajax.reload();
+                    })
+                }
+            })
+        })
+
+        $(document).on('click', '#btnDelete', function (e) {
+            id = $(this).data('id');
+            e.preventDefault();
+            console.log($(this).data('id'));
+            Swal.fire({
+                title: 'Kamu Yakin?',
+                text: "Hapus Produk " + $(this).parent().prev().html() + "",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                      url: "{{ url('/api/v1/delete-produk') }}",
+                      type: "delete",
+                      data: {
+                        id: id
+                      },
+                      success: function(res) {
+                        console.log(res);
+                        location.reload();
+                      }
+                    })
+                }
+            })
+        })
+
+        $(document).on('click', '#btnEdit', function (e) {
+          id = $(this).data('id');
+            e.preventDefault();
+            console.log($(this).parent().prev().html());
+            $.ajax({
+              url: "{{ url('/api/v1/show-produk') }}",
+              type: "post",
+              data: {
+                id: id
+              },
+              success: function(res) {
+                console.log(res);
+                $('#title').html('Edit Produk ' + '<b>' + res.data.nama + '</b>');
+                modalshow();
+                $('#id').val(res.data.id);
+                $('#kode').val(res.data.kode);
+                $('#nama').val(res.data.nama);
+                // location.reload();
+              }
+            })
+        })
+
+        $(document).on('click', '#btnDetail', function (e) {
+          id = $(this).data('id');
+            e.preventDefault();
+            console.log('detail');
+            $.ajax({
+              url: "{{ url('/api/v1/detail-produk') }}",
+              type: "post",
+              data: {
+                id: id
+              },
+              success: function(res) {
+                console.log(res);
+                window.location.href = "/master/produk-detail/" + id;
+                // $('#title').html('Edit Produk ' + '<b>' + res.data.nama + '</b>');
+                // modalshow();
+                // $('#id').val(res.data.id);
+                // $('#kode').val(res.data.kode);
+                // $('#nama').val(res.data.nama);
+                // location.reload();
+              }
+            })
+        })
+
+        $('body').on('submit', '#formProdukEdit', function (e) {
+            e.preventDefault();
+            $('#btnSave').html('Sending..');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, save it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var formData = new FormData(this);
+                    $.ajax({
+                        type: "post",
+                        url: "{{ url('/api/v1/create-produk') }}",
+                        data: formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: (data) => {
+                            Swal.fire(
+                                'Success!',
+                                data.msg,
+                                'success'
+                            )
+                            location.reload();
+                        }
+                    })
+                }
+            })
+        })
     });
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
+
 </script>
 @endpush

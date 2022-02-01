@@ -11,4 +11,9 @@ class ProdukController extends Controller
     {
         return view('admin.produk.index');
     }
+
+    function index_produk_sub()
+    {
+        return view('admin.produk.produk');
+    }
 }

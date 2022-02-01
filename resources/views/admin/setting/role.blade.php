@@ -11,29 +11,20 @@
     <div class="col-6">
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Tambah Sub Menu</h3>
+                <h3 class="card-title">Tambah Role</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
             <form role="form" action="{{ route('menu.store') }}" method="POST">
                 @csrf
                 <div class="card-body">
-                    <input type="hidden" name="menu_id" id="menu_id">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nama</label>
                         <input type="text" class="form-control" name="nama" id="exampleInputEmail1" placeholder="Nama">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Icon</label>
-                        <input type="text" class="form-control" name="icons" id="exampleInputPassword1" placeholder="Icon">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Url</label>
-                        <input type="text" class="form-control" name="url" id="exampleInputPassword1" placeholder="URL">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Ordering</label>
-                        <input type="text" class="form-control" name="ordering" id="exampleInputPassword1" placeholder="Ordering">
+                        <label for="exampleInputEmail1">Kode</label>
+                        <input type="text" class="form-control" name="nama" id="exampleInputEmail1" placeholder="Kode">
                     </div>
                 </div>
                 <!-- /.card-body -->
