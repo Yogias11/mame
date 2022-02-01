@@ -12,4 +12,9 @@ class KelompokProduk extends Model
     protected $table = 'kelompok_produk';
 
     protected $fillable = ['jenis_id', 'nama'];
+
+    function jenis()
+    {
+        return $this->belongsTo(Mjenis::class,'jenis_id');
+    }
 }

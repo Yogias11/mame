@@ -23,6 +23,9 @@ Route::prefix('master')->group(function() {
     // produk
     Route::get('produk', [ProdukController::class, 'index_produk'])->name('produk.index');
     Route::get('produk-detail/{id}', [ProdukController::class, 'index_produk_sub']);
+
+    // kategori
+    Route::get('kategori', [ProdukController::class, 'index_kategori']);
 });
 
 Route::prefix('setting')->group(function() {

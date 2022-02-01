@@ -66,7 +66,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ asset('') }}assets/index2.html" class="nav-link">
+                <a href="{{ url('master/kategori') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Kelompok Produk</p>
                 </a>
@@ -103,8 +103,14 @@
               </li>
               <li class="nav-item">
                 <a href="{{ url('setting/roles') }}" class="nav-link">
-                  <i class="far fa-user nav-icon"></i>
+                  <i class="fas fa-user nav-icon"></i>
                   <p>Roles</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('setting/roles') }}" class="nav-link">
+                  <i class="fas fa-users nav-icon"></i>
+                  <p>Users</p>
                 </a>
               </li>
               <li class="nav-item">

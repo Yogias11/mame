@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\KelompokProduk;
 use App\Models\MProduk;
 use App\Models\Produk as ModelsProduk;
 use Illuminate\Http\Request;
@@ -155,7 +156,8 @@ class Produk extends Controller
                     return $d->produk->nama;
                 })
                 ->addColumn('aksi', function($d) {
-                    return '<button class="btn btn-outline-info btn-sm" id="btnDetail" data-id="'.$d->id.'"><i class="fas fa-eye"> Detail</i></button>
+                    return '
+                    <button class="btn btn-outline-info btn-sm" id="btnDetail" data-id="'.$d->id.'"><i class="fas fa-eye"> Detail</i></button>
                     <button class="btn btn-outline-success btn-sm" id="btnEdit" data-id="'.$d->id.'"><i class="fas fa-edit"> Edit</i></button>
                     <button class="btn btn-outline-danger btn-sm" id="btnDelete" data-id="'.$d->id.'"><i class="fas fa-trash"> Delete</i></button>';
                 })
@@ -246,6 +248,120 @@ class Produk extends Controller
     {
         try {
             $produk = ModelsProduk::find($request->id);
+        
+            if (isset($produk)) {
+                $produk->delete();
+                return response()->json([
+                    'success' => true,
+                    'msg' => 'Data berhasil dihapus',
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'msg' => 'Data gagal dihapus',
+                ]);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'msg' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    // kelompok produk
+    function get_data_kategori()
+    {
+        try {
+            $data = KelompokProduk::all();
+
+            return datatables()->of($data)
+                ->addIndexColumn()
+                ->addColumn('jenis', function($d) {
+                    return $d->jenis_id == null ? '-' : '<span class="badge badge-warning">'.$d->jenis->nama.'</span>';
+                })
+                ->addColumn('nama', function($d){
+                    return $d->nama;
+                })
+                ->addColumn('aksi', function($d) {
+                    return '
+                    <button class="btn btn-outline-info btn-sm" id="btnDetail" data-id="'.$d->id.'"><i class="fas fa-eye"> Detail</i></button>
+                    <button class="btn btn-outline-success btn-sm" id="btnEdit" data-id="'.$d->id.'"><i class="fas fa-edit"> Edit</i></button>
+                    <button class="btn btn-outline-danger btn-sm" id="btnDelete" data-id="'.$d->id.'"><i class="fas fa-trash"> Delete</i></button>';
+                })
+                ->rawColumns(['aksi', 'jenis'])
+                ->make(true);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'msg' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    function create_data_kategori(Request $request)
+    {
+        try {
+            if(isset($request->id)) {
+                $data = KelompokProduk::find($request->id);
+                $data->id = $request->id;
+                $data->jenis_id = $request->jenis_id;
+                $data->nama = $request->nama;
+            } else {
+                $data = new KelompokProduk();
+
+                $data->jenis_id = $request->jenis_id;
+                $data->nama = $request->nama;
+            }
+
+            if ($data->save()) {
+                return response()->json([
+                    'success' => true,
+                    'msg' => 'Data berhasil ditambahkan',
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'msg' => 'Data gagal ditambahkan',
+                ]);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'msg' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    function show_data_kategori(Request $request)
+    {
+        try {
+            $produk = KelompokProduk::find($request->id);
+        
+            if (isset($produk)) {
+                return response()->json([
+                    'success' => true,
+                    'msg' => 'Data berhasil ditemukan',
+                    'data' => $produk,
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'msg' => 'Data gagal ditemukan',
+                ]);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'msg' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    function delete_data_kategori(Request $request)
+    {
+        try {
+            $produk = KelompokProduk::find($request->id);
         
             if (isset($produk)) {
                 $produk->delete();

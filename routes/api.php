@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\SettingController;
 use App\Http\Controllers\API\Master;
 use App\Http\Controllers\API\Produk;
 use Illuminate\Http\Request;
@@ -22,6 +23,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('master')->group(function() {
     Route::post('kategori', [Master::class, 'get_kelompok_produk']);
+    Route::post('jenis', [Master::class, 'get_jenis_kelompok']);
+
+    Route::prefix('setting')->group(function() {
+        Route::post('role', [SettingController::class, 'get_data_role']);
+        Route::post('create-role', [SettingController::class, 'create_data_role'])->name('role.store');
+        Route::post('show-role', [SettingController::class, 'show_data_role']);
+        Route::delete('delete-role', [SettingController::class, 'delete_data_role'])->name('role.delete');
+    });
 });
 
 
@@ -35,8 +44,9 @@ Route::prefix('v1')->group(function() {
     Route::post('show-produk/sub', [Produk::class, 'show_data_produk_sub']);
     Route::post('create-subproduk', [Produk::class, 'create_data_produk_sub']);
     Route::delete('delete-subproduk', [Produk::class, 'delete_data_produk_sub']);
-    // Route::prefix('produk')->group(function() {
-    //     Route::post('delete', [])
-    // });
-
+    
+    Route::post('kategori', [Produk::class, 'get_data_kategori']);
+    Route::post('create-kategori', [Produk::class, 'create_data_kategori']);
+    Route::post('show-kategori', [Produk::class, 'show_data_kategori']);
+    Route::delete('delete-kategori', [Produk::class, 'delete_data_kategori']);
 });

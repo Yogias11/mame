@@ -16,4 +16,9 @@ class ProdukController extends Controller
     {
         return view('admin.produk.produk');
     }
+
+    function index_kategori()
+    {
+        return view('admin.kelompokproduk.index');
+    }
 }

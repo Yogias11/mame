@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Divisi extends Model
+class Mjenis extends Model
 {
     use HasFactory;
 
-    protected $table = 'divisi';
+    protected $table = 'm_jenis_gks';
 
-    protected $fillable = ['nama', 'kode', 'url', 'icon'];
+    protected $fillable = ['nama'];
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\KelompokProduk;
+use App\Models\Mjenis;
 use Illuminate\Http\Request;
 
 class Master extends Controller
@@ -12,6 +13,12 @@ class Master extends Controller
     {
         $data = KelompokProduk::all();
 
+        return response()->json($data);
+    }
+
+    function get_jenis_kelompok()
+    {
+        $data = Mjenis::all();
         return response()->json($data);
     }
 }
