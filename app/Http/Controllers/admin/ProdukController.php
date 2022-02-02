@@ -21,4 +21,9 @@ class ProdukController extends Controller
     {
         return view('admin.kelompokproduk.index');
     }
+
+    function index_varian()
+    {
+        return view('admin.produk.varian');
+    }
 }

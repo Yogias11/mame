@@ -8,7 +8,7 @@
 
 @section('content')
 <div class="row">
-    <div class="col-6">
+    <div class="col-12">
         <div class="card card-primary">
             <div class="card-header">
                 <h3 class="card-title">Tambah Role</h3>
@@ -17,15 +17,30 @@
             <!-- form start -->
             <form role="form" id="formRole" name="formRole">
                 @csrf
-                
+                <input type="hidden" name="divisi_id" id="dvsid">
                 <div class="card-body">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Nama</label>
-                        <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Kode</label>
-                        <input type="text" class="form-control" name="kode" id="kode" placeholder="Kode">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Nama</label>
+                                <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email</label>
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Username</label>
+                                <input type="text" class="form-control" name="username" id="username" placeholder="Username">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Password</label>
+                                <input type="text" class="form-control" name="password" id="password" placeholder="Password" minlength="6">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -41,7 +56,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Daftar Role</h3>
+                <h3 class="card-title">Daftar User Role <span id="titlee"></span></h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -50,6 +65,7 @@
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
+                            <th>Username</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -77,15 +93,30 @@
           @csrf
         <div class="modal-body">
           <input type="hidden" name="id" id="id">
-          <div class="form-group">
-            <label for="exampleInputEmail1">Nama</label>
-            <input type="text" class="form-control" name="nama" id="nama1" placeholder="Nama">
+          <input type="hidden" name="divisi_id" id="dvsidedit">
+          <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Nama</label>
+                    <input type="text" class="form-control" name="nama" id="nama1" placeholder="Nama">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email</label>
+                    <input type="email" class="form-control" name="email" id="email1" placeholder="Email">
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Username</label>
+                    <input type="text" class="form-control" name="username" id="username1" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Password</label>
+                    <input type="text" class="form-control" name="password" id="password1" placeholder="Password" minlength="6">
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="exampleInputEmail1">Kode</label>
-            <input type="text" class="form-control" name="kode" id="kode1" placeholder="Kode">
-        </div>
-            <!-- /.card-body -->
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -109,7 +140,10 @@
     $(function () {
         // general
         var id = null;
-        
+        let url = $(location).attr('href');
+        let divisiid = url.substring(url.lastIndexOf('/') + 1); 
+        let divisi = $('#dvsid').val(divisiid);
+        let divisi1 = $('#dvsidedit').val(divisiid);
         function modalshow() {
           $('#modal-info').modal('show');
         }
@@ -119,14 +153,20 @@
             "responsive": true,
             "autoWidth": false,
             ajax: {
-                url: "/api/master/setting/role",
+                url: "/api/master/setting/users",
                 type: "post",
+                data: {
+                    id: divisiid
+                },
             },
             columns: [{
                     data: 'DT_RowIndex'
                 },
                 {
                     data: 'nama'
+                },
+                {
+                    data: 'username'
                 },
                 {
                     data: 'aksi'
@@ -150,7 +190,7 @@
                     var formData = new FormData(this);
                     $.ajax({
                         type: "post",
-                        url: "{{ route('role.store') }}",
+                        url: "{{ route('user.store') }}",
                         data: formData,
                         cache: false,
                         contentType: false,
@@ -174,7 +214,7 @@
             console.log($(this).data('id'));
             Swal.fire({
                 title: 'Kamu Yakin?',
-                text: "Hapus kategori " + $(this).parent().prev().html() + "",
+                text: "Hapus User " + $(this).parent().prev().html() + "",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -183,7 +223,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                      url: "{{ url('/api/master/setting/delete-role') }}",
+                      url: "{{ url('/api/master/setting/delete-users') }}",
                       type: "delete",
                       data: {
                         id: id
@@ -202,20 +242,20 @@
             e.preventDefault();
             console.log($(this).parent().prev().html());
             $.ajax({
-              url: "{{ url('/api/master/setting/show-role') }}",
+              url: "{{ url('/api/master/setting/show-users') }}",
               type: "post",
               data: {
                 id: id
               },
               success: function(res) {
                 console.log(res);
-                $('#title').html('Edit Role ' + '<b>' + res.data.nama + '</b>');
+                $('#title').html('Edit User ' + '<b>' + res.data.nama + '</b>');
                 modalshow();
                 $('#id').val(res.data.id).attr('disabled', false);
-                // $('#jenis_id').val(res.data.jenis_id).trigger('change').attr('disabled', false);
                 $('#nama1').val(res.data.nama).attr('disabled', false);
-                $('#kode1').val(res.data.kode).attr('disabled', false);
-                // location.reload();
+                $('#email1').val(res.data.email).attr('disabled', false);
+                $('#username1').val(res.data.username).attr('disabled', false);
+                $('#password1').val(bcrypt.hash(res.data.password,4)).attr('disabled', false);
               }
             })
         })
@@ -225,27 +265,22 @@
             e.preventDefault();
             console.log($(this).parent().prev().html());
             $.ajax({
-              url: "{{ url('/api/master/setting/show-role') }}",
+              url: "{{ url('/api/master/setting/show-users') }}",
               type: "post",
               data: {
                 id: id
               },
               success: function(res) {
                 console.log(res);
-                $('#title').html('Detail Role ' + '<b>' + res.data.nama + '</b>');
+                $('#title').html('Detail User ' + '<b>' + res.data.nama + '</b>');
                 modalshow();
                 $('#id').val(res.data.id).attr('disabled', true);
-                // $('#jenis_id').val(res.data.jenis_id).trigger('change').attr('disabled', false);
                 $('#nama1').val(res.data.nama).attr('disabled', true);
-                $('#kode1').val(res.data.kode).attr('disabled', true);
-                // location.reload();
+                $('#email1').val(res.data.email).attr('disabled', true);
+                $('#username1').val(res.data.username).attr('disabled', true);
+                $('#password1').val(res.data.password).attr('disabled', true);
               }
             })
-        })
-
-        $(document).on('click', '#btnUser', function (e) {
-            id = $(this).data('id');
-            window.location.href = "/setting/role-user/" + id;
         })
 
         $('body').on('submit', '#formProdukEdit', function (e) {
@@ -264,7 +299,7 @@
                     var formData = new FormData(this);
                     $.ajax({
                         type: "post",
-                        url: "{{ route('role.store') }}",
+                        url: "{{ route('user.store') }}",
                         data: formData,
                         cache: false,
                         contentType: false,

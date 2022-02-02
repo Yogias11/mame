@@ -108,12 +108,6 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ url('setting/roles') }}" class="nav-link">
-                  <i class="fas fa-users nav-icon"></i>
-                  <p>Users</p>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a href="{{ asset('') }}assets/index3.html" class="nav-link">
                   <i class="fas fa-tools nav-icon"></i>
                   <p>Akses</p>

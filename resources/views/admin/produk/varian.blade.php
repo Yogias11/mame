@@ -8,54 +8,32 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Tambah Produk</h3>
+                <h3 class="card-title">Tambah Varian</h3>
             </div>
             <form role="form" action="" id="formProduk" name="formProduk">
                 @csrf
                 <input type="hidden" name="produk_id" id="prdid">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Kelompok Produk</label>
-                                <select name="kelompok_produk_id" id="kelompok_produk_id" class="form-control kategori">
-                                    <option>Pilih Kategori</option>
+                                <label for="exampleInputEmail1">Satuan</label>
+                                <select name="satuan_id" id="satuan_id" class="form-control satuan">
+                                    <option>Pilih Satuan</option>
                                 </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Kode</label>
-                                <input type="text" class="form-control" name="kode" id="exampleInputEmail1" placeholder="Kode" style="text-transform:uppercase">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">No AKD</label>
-                                <input type="text" class="form-control" name="no_akd" id="exampleInputEmail1" placeholder="No AKD" style="text-transform:uppercase">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Merk</label>
-                                <input type="text" class="form-control" name="merk" id="exampleInputEmail1" placeholder="Merk" style="text-transform:uppercase">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nama</label>
-                                <input type="text" class="form-control" name="nama" id="exampleInputEmail1" placeholder="Nama" style="text-transform:uppercase">
+                                <input type="text" class="form-control" name="nama" id="exampleInputEmail1" placeholder="Varian" style="text-transform:uppercase">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">COO</label>
-                                <select name="coo" id="coo" class="form-control">
-                                    <option>Pilih COO</option>
-                                    <option value="1">1</option>
-                                    <option value="0">0</option>
-                                </select>
+                                <label for="exampleInputEmail1">Stok</label>
+                                <input type="number" class="form-control" name="stok" id="exampleInputEmail1" placeholder="Stok" style="text-transform:uppercase">
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Nama COO</label>
-                        <input type="text" class="form-control" name="nama_coo" id="exampleInputEmail1" placeholder="Nama COO" style="text-transform:uppercase">
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -80,11 +58,9 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Kode</th>
-                            <th>Kelompok Produk</th>
-                            <th>No AKD</th>
-                            <th>Nama</th>
-                            <th>Merk</th>
+                            {{-- <th>Kode</th> --}}
+                            <th>Produk</th>
+                            <th>Stok</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -111,45 +87,19 @@
       <div class="modal-body">
         <input type="hidden" name="id" id="id">
         <input type="hidden" name="produk_id" id="prdidedit">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Kelompok Produk</label>
-                    <select name="kelompok_produk_id" id="kelompok_produk_id1" class="form-control kategori">
-                        <option>Pilih Kategori</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Kode</label>
-                    <input type="text" class="form-control" name="kode" id="kode" placeholder="Kode" style="text-transform:uppercase">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">No AKD</label>
-                    <input type="text" class="form-control" name="no_akd" id="no_akd" placeholder="No AKD" style="text-transform:uppercase">
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Merk</label>
-                    <input type="text" class="form-control" name="merk" id="merk" placeholder="Merk" style="text-transform:uppercase">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Nama</label>
-                    <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama" style="text-transform:uppercase">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">COO</label>
-                    <select name="coo" id="coo1" class="form-control">
-                        <option>Pilih COO</option>
-                        <option value="1">1</option>
-                        <option value="0">0</option>
-                    </select>
-                </div>
-            </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Satuan</label>
+            <select name="satuan_id" id="satuan_id1" class="form-control satuan">
+                <option>Pilih Satuan</option>
+            </select>
         </div>
         <div class="form-group">
-            <label for="exampleInputEmail1">Nama COO</label>
-            <input type="text" class="form-control" name="nama_coo" id="nama_coo" placeholder="Nama COO" style="text-transform:uppercase">
+            <label for="exampleInputEmail1">Nama</label>
+            <input type="text" class="form-control" name="nama" id="nama1" placeholder="Varian" style="text-transform:uppercase">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Stok</label>
+            <input type="number" class="form-control" name="stok" id="stok1" placeholder="Stok" style="text-transform:uppercase">
         </div>
       </div>
       <div class="modal-footer justify-content-between">
@@ -177,13 +127,14 @@
         let produkid = url.substring(url.lastIndexOf('/') + 1); 
         let prdid = $('#prdid').val(produkid);
         let prdidedit = $('#prdidedit').val(produkid);
+        console.log(produkid);
         
         $.ajax({
-            url: "{{ url('/api/master/kategori') }}",
+            url: "{{ url('/api/master/satuan') }}",
             type: "post",
             success: function(res) {
                 $.each(res, function(key, value){
-                    $('.kategori').append('<option value="' + value.id + '">' + value.nama +
+                    $('.satuan').append('<option value="' + value.id + '">' + value.nama +
                     '</option');
                 })
             }
@@ -193,7 +144,7 @@
             "responsive": true,
             "autoWidth": false,
             ajax: {
-                url: "/api/v1/detail-produk",
+                url: "/api/v1/varian",
                 type: "post",
                 data: {
                     id: produkid
@@ -203,22 +154,17 @@
                     data: 'DT_RowIndex'
                 },
                 {
-                    data: 'kode'
+                    data: 'produk'
                 },
                 {
-                    data: 'kelompok_produk'
+                    data: 'stok'
                 },
-                {
-                    data: 'no_akd'
-                },
-                { data: 'nama'},
-                {data: 'merk'},
                 {data: 'aksi'},
             ],
         });
 
         $.ajax({
-            url: "/api/v1/detail-produk",
+            url: "/api/v1/varian",
             type: "post",
             data: {
                 id: produkid
@@ -245,7 +191,7 @@
                     var formData = new FormData(this);
                     $.ajax({
                         type: "post",
-                        url: "{{ url('/api/v1/create-subproduk') }}",
+                        url: "{{ url('/api/v1/create-varian') }}",
                         data: formData,
                         cache: false,
                         contentType: false,
@@ -270,7 +216,7 @@
             console.log($(this).data('id'));
             Swal.fire({
                 title: 'Kamu Yakin?',
-                text: "Hapus Produk " + $(this).parent().prev().html() + "",
+                text: "Hapus Produk " + $(this).parent().prev().prev().text() + "",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -279,7 +225,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                      url: "{{ url('/api/v1/delete-subproduk') }}",
+                      url: "{{ url('/api/v1/delete-varian') }}",
                       type: "delete",
                       data: {
                         id: id
@@ -294,64 +240,47 @@
         })
 
         $(document).on('click', '#btnEdit', function (e) {
+            $('#title').html('Edit Varian ' + '<b>' + $(this).parent().prev().prev().text() + '</b>');
           id = $(this).data('id');
             e.preventDefault();
             console.log($(this).parent().prev().html());
             $.ajax({
-              url: "{{ url('/api/v1/show-produk/sub') }}",
+              url: "{{ url('/api/v1/show-varian') }}",
               type: "post",
               data: {
                 id: id
               },
               success: function(res) {
                 console.log(res);
-                $('#title').html('Edit Produk ' + '<b>' + res.data.nama + '</b>');
                 $('#modal-info').modal('show');
                 $('#id').val(res.data.id).attr('disabled', false);
-                $('#kode').val(res.data.kode).attr('disabled', false);
-                $('#nama').val(res.data.nama).attr('disabled', false);
-                $('#merk').val(res.data.merk).attr('disabled', false);
-                $('#nama_coo').val(res.data.nama_coo).attr('disabled', false);
-                $('#no_akd').val(res.data.no_akd).attr('disabled', false);
-                $('#kelompok_produk_id1').val(res.data.kelompok_produk_id).trigger('change').attr('disabled', false);
-                $('#coo1').val(res.data.coo).trigger('change').attr('disabled', false);
-               
+                $('#nama1').val(res.data.nama).attr('disabled', false);
+                $('#stok1').val(res.data.stok).attr('disabled', false);
+                $('#satuan_id1').val(res.data.satuan_id).trigger('change').attr('disabled', false);
               }
             })
         })
 
         $(document).on('click', '#btnDetail', function (e) {
-            id = $(this).data('id');
+            $('#title').html('Edit Produk ' + '<b>' + $(this).parent().prev().prev().text() + '</b>');
+          id = $(this).data('id');
             e.preventDefault();
             console.log($(this).parent().prev().html());
             $.ajax({
-              url: "{{ url('/api/v1/show-produk/sub') }}",
+              url: "{{ url('/api/v1/show-varian') }}",
               type: "post",
               data: {
                 id: id
               },
               success: function(res) {
                 console.log(res);
-                $('#title').html('Detail Produk ' + '<b>' + res.data.nama + '</b>');
                 $('#modal-info').modal('show');
                 $('#id').val(res.data.id).attr('disabled', true);
-                $('#kode').val(res.data.kode).attr('disabled', true);
-                $('#nama').val(res.data.nama).attr('disabled', true);
-                $('#merk').val(res.data.merk).attr('disabled', true);
-                $('#nama_coo').val(res.data.nama_coo).attr('disabled', true);
-                $('#no_akd').val(res.data.no_akd).attr('disabled', true);
-                $('#kelompok_produk_id1').val(res.data.kelompok_produk_id).trigger('change').attr('disabled', true);
-                $('#coo1').val(res.data.coo).trigger('change').attr('disabled', true);
-                
+                $('#nama1').val(res.data.nama).attr('disabled', true);
+                $('#stok1').val(res.data.stok).attr('disabled', true);
+                $('#satuan_id1').val(res.data.satuan_id).trigger('change').attr('disabled', true);
               }
             })
-        })
-
-        $(document).on('click', '#btnVarian', function (e) {
-          id = $(this).data('id');
-            e.preventDefault();
-            console.log(id);
-            window.location.href = "/master/produk-varian/" + id;
         })
 
         $('body').on('submit', '#formProdukEdit', function (e) {
@@ -370,7 +299,7 @@
                     var formData = new FormData(this);
                     $.ajax({
                         type: "post",
-                        url: "{{ url('/api/v1/create-subproduk') }}",
+                        url: "{{ url('/api/v1/create-varian') }}",
                         data: formData,
                         cache: false,
                         contentType: false,

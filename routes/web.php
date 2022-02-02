@@ -23,6 +23,7 @@ Route::prefix('master')->group(function() {
     // produk
     Route::get('produk', [ProdukController::class, 'index_produk'])->name('produk.index');
     Route::get('produk-detail/{id}', [ProdukController::class, 'index_produk_sub']);
+    Route::get('produk-varian/{id}', [ProdukController::class, 'index_varian']);
 
     // kategori
     Route::get('kategori', [ProdukController::class, 'index_kategori']);
@@ -37,4 +38,5 @@ Route::prefix('setting')->group(function() {
     Route::get('submenu/{id}', [SettingController::class, 'index_submenu'])->name('submenu.index');
 
     Route::get('roles/', [SettingController::class, 'index_role'])->name('role.index');
+    Route::get('role-user/{id}', [SettingController::class, 'index_users'])->name('role.index');
 });
